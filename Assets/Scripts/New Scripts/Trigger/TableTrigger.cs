@@ -13,7 +13,7 @@ public class TableTrigger : MonoBehaviour
     // Part Animations
     public PlayableDirector heartTimeline;
     public PlayableDirector LungsTimeline;
-    public PlayableDirector SpineTimeline;
+    public PlayableDirector BrainTimeline;
     public PlayableDirector RibsTimeline;
 
     public float messageDuration = 2f;
@@ -86,8 +86,8 @@ public class TableTrigger : MonoBehaviour
                 if (LungsTimeline != null) LungsTimeline.Play();
                 break;
 
-            case BodyPart.Spine:
-                if (SpineTimeline != null) SpineTimeline.Play();
+            case BodyPart.Brain:
+                if (BrainTimeline != null) BrainTimeline.Play();
                 break;
 
             case BodyPart.Ribs:

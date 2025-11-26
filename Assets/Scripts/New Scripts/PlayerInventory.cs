@@ -5,7 +5,7 @@ public enum BodyPart
     None,
     Heart,
     Lungs,
-    Spine,
+    Brain,
     Ribs
 }
 
