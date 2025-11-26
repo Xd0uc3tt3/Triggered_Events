@@ -6,7 +6,16 @@ using System.Collections;
 public class TableTrigger : MonoBehaviour
 {
     public TMP_Text uiText;
+
+    // Door animation
     public PlayableDirector doorDirector;
+
+    // Part Animations
+    public PlayableDirector heartTimeline;
+    public PlayableDirector armTimeline;
+    public PlayableDirector legTimeline;
+    public PlayableDirector headTimeline;
+
     public float messageDuration = 2f;
 
     private bool hasPlayed = false;
@@ -17,14 +26,23 @@ public class TableTrigger : MonoBehaviour
         if (!other.CompareTag("Player"))
             return;
 
+        PlayerInventory inventory = other.GetComponent<PlayerInventory>();
+        if (inventory == null)
+            return;
+
         if (!hasPlayed)
         {
             StartCoroutine(FirstInteractionSequence());
+            return;
         }
-        else
+
+        if (!inventory.HasPart())
         {
-            StartCoroutine(SecondInteractionSequence());
+            StartCoroutine(NoPartSequence());
+            return;
         }
+
+        StartCoroutine(PlacePartSequence(inventory));
     }
 
     private IEnumerator FirstInteractionSequence()
@@ -41,12 +59,46 @@ public class TableTrigger : MonoBehaviour
         HideMessage();
     }
 
-    private IEnumerator SecondInteractionSequence()
+    private IEnumerator NoPartSequence()
     {
         ShowMessage("I don't have any parts");
         yield return new WaitForSeconds(messageDuration);
 
         ShowMessage("I should look around to find some parts");
+        yield return new WaitForSeconds(messageDuration);
+
+        HideMessage();
+    }
+
+    private IEnumerator PlacePartSequence(PlayerInventory inventory)
+    {
+        BodyPart part = inventory.currentPart;
+
+        ShowMessage("Placing " + part.ToString().ToLower() + "...");
+        yield return new WaitForSeconds(messageDuration);
+
+        switch (part)
+        {
+            case BodyPart.Heart:
+                if (heartTimeline != null) heartTimeline.Play();
+                break;
+
+            case BodyPart.Part2:
+                if (armTimeline != null) armTimeline.Play();
+                break;
+
+            case BodyPart.Part3:
+                if (legTimeline != null) legTimeline.Play();
+                break;
+
+            case BodyPart.Part4:
+                if (headTimeline != null) headTimeline.Play();
+                break;
+        }
+
+        inventory.RemovePart();
+
+        ShowMessage("One step closer...");
         yield return new WaitForSeconds(messageDuration);
 
         HideMessage();
@@ -73,3 +125,4 @@ public class TableTrigger : MonoBehaviour
         uiText.text = "";
     }
 }
+

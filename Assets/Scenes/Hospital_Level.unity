@@ -5947,6 +5947,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   heartTimeline: {fileID: 556976915}
+  uiText: {fileID: 1262579445}
+  messageDuration: 5
 --- !u!1001 &217705485
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6758,7 +6760,11 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 477847871}
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 6134813731984424939, guid: cc1b88b98e24f9d4cbd96ea657055335,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 540054364}
   m_SourcePrefab: {fileID: 100100000, guid: cc1b88b98e24f9d4cbd96ea657055335, type: 3}
 --- !u!1001 &267996809
 PrefabInstance:
@@ -12724,6 +12730,25 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 537110222}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &540054360 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6134813731984424939, guid: cc1b88b98e24f9d4cbd96ea657055335,
+    type: 3}
+  m_PrefabInstance: {fileID: 257403032}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &540054364
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 540054360}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 57433e7cdda140646b6afd8499c8c680, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentPart: 0
 --- !u!4 &540748262 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4526845779383028992, guid: 8b1b264944235ad4e9fbf6de90402f82,
@@ -22019,6 +22044,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   uiText: {fileID: 1262579445}
   doorDirector: {fileID: 471909279}
+  heartTimeline: {fileID: 0}
+  armTimeline: {fileID: 0}
+  legTimeline: {fileID: 0}
+  headTimeline: {fileID: 0}
   messageDuration: 6
 --- !u!1001 &1060507364
 PrefabInstance:
