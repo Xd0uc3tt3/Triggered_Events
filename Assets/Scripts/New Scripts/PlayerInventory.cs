@@ -4,9 +4,9 @@ public enum BodyPart
 {
     None,
     Heart,
-    Part2,
-    Part3,
-    Part4
+    Lungs,
+    Spine,
+    Ribs
 }
 
 public class PlayerInventory : MonoBehaviour

@@ -1,13 +1,15 @@
 using UnityEngine;
 
-public class LungBreathing : MonoBehaviour
+public class Breathing : MonoBehaviour
 {
     [Header("Breathing Settings")]
-    public float breathingSpeed = 0.5f;
-    public float breathingIntensity = 0.15f;
+    public float inhaleDuration = 2.0f;
+    public float exhaleDuration = 0.8f;
+    public float intensity = 0.2f;
 
     private Vector3 originalScale;
-    private float timer = 0f;
+    private float timer;
+    private bool inhaling = true;
 
     private void Start()
     {
@@ -16,16 +18,40 @@ public class LungBreathing : MonoBehaviour
 
     private void Update()
     {
-        BreathingVisual();
+        BreathingCycle();
     }
 
-    private void BreathingVisual()
+    private void BreathingCycle()
     {
-        timer += Time.deltaTime * breathingSpeed;
+        if (inhaling)
+        {
+            timer += Time.deltaTime / inhaleDuration;
 
-        float cycle = (Mathf.Sin(timer) + 1f) * 0.5f;
+            if (timer >= 1f)
+            {
+                timer = 1f;
+                inhaling = false;
+            }
+        }
+        else
+        {
+            timer -= Time.deltaTime / exhaleDuration;
 
-        float scaleFactor = 1f + cycle * breathingIntensity;
+            if (timer <= 0f)
+            {
+                timer = 0f;
+                inhaling = true;
+            }
+        }
+
+        float eased = SmoothStep(timer);
+
+        float scaleFactor = 1f + eased * intensity;
         transform.localScale = originalScale * scaleFactor;
+    }
+
+    private float SmoothStep(float t)
+    {
+        return t * t * (3f - 2f * t);
     }
 }
