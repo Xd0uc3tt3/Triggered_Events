@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.Playables;
 
-public class OfficeDoorTrigger : MonoBehaviour
+public class DormDoorTrigger : MonoBehaviour
 {
     public PlayableDirector animationDirector;
     public bool destroyAfterTrigger = true;
@@ -33,4 +33,3 @@ public class OfficeDoorTrigger : MonoBehaviour
         }
     }
 }
-

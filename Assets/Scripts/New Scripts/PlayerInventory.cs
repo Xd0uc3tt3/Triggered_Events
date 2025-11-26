@@ -6,7 +6,7 @@ public enum BodyPart
     Heart,
     Lungs,
     Brain,
-    Ribs
+    Stomach
 }
 
 public class PlayerInventory : MonoBehaviour

@@ -14,7 +14,7 @@ public class TableTrigger : MonoBehaviour
     public PlayableDirector heartTimeline;
     public PlayableDirector lungsTimeline;
     public PlayableDirector brainTimeline;
-    public PlayableDirector ribsTimeline;
+    public PlayableDirector StomachTimeline;
 
     // Ominous stage animations
     public PlayableDirector ominousStage5_4;
@@ -96,9 +96,9 @@ public class TableTrigger : MonoBehaviour
         {
             brainTimeline.Play();
         }
-        else if (part == BodyPart.Ribs && ribsTimeline != null)
+        else if (part == BodyPart.Stomach && StomachTimeline != null)
         {
-            ribsTimeline.Play();
+            StomachTimeline.Play();
         }
 
         yield return new WaitForSeconds(messageDuration);
