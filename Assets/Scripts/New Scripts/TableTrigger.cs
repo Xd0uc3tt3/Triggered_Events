@@ -19,22 +19,37 @@ public class TableTrigger : MonoBehaviour
 
         if (!hasPlayed)
         {
-            StartCoroutine(FirstMessageThenDoor());
+            StartCoroutine(FirstInteractionSequence());
         }
         else
         {
-            ShowMessage("I don't have any parts");
+            StartCoroutine(SecondInteractionSequence());
         }
     }
 
-    private IEnumerator FirstMessageThenDoor()
+    private IEnumerator FirstInteractionSequence()
     {
         ShowMessage("I must rebuild him");
-
         yield return new WaitForSeconds(messageDuration);
 
         doorDirector.Play();
         hasPlayed = true;
+
+        ShowMessage("There must be some parts around");
+        yield return new WaitForSeconds(messageDuration);
+
+        HideMessage();
+    }
+
+    private IEnumerator SecondInteractionSequence()
+    {
+        ShowMessage("I don't have any parts");
+        yield return new WaitForSeconds(messageDuration);
+
+        ShowMessage("I should look around to find some parts");
+        yield return new WaitForSeconds(messageDuration);
+
+        HideMessage();
     }
 
     private void ShowMessage(string message)
@@ -45,6 +60,11 @@ public class TableTrigger : MonoBehaviour
             StopCoroutine(hideCoroutine);
 
         hideCoroutine = StartCoroutine(HideMessageAfterDelay());
+    }
+
+    private void HideMessage()
+    {
+        uiText.text = "";
     }
 
     private IEnumerator HideMessageAfterDelay()
