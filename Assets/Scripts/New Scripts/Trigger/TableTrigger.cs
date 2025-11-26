@@ -75,7 +75,6 @@ public class TableTrigger : MonoBehaviour
         BodyPart part = inventory.currentPart;
 
         ShowMessage("Placing " + part.ToString().ToLower() + "...");
-        yield return new WaitForSeconds(messageDuration);
 
         switch (part)
         {
