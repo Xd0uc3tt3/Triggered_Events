@@ -12,14 +12,22 @@ public class TableTrigger : MonoBehaviour
 
     // Part Animations
     public PlayableDirector heartTimeline;
-    public PlayableDirector LungsTimeline;
-    public PlayableDirector BrainTimeline;
-    public PlayableDirector RibsTimeline;
+    public PlayableDirector lungsTimeline;
+    public PlayableDirector brainTimeline;
+    public PlayableDirector ribsTimeline;
+
+    // Ominous stage animations
+    public PlayableDirector ominousStage5_4;
+    public PlayableDirector ominousStage4_3;
+    public PlayableDirector ominousStage3_2;
+    public PlayableDirector ominousStage2_1;
 
     public float messageDuration = 2f;
 
     private bool hasPlayed = false;
     private Coroutine hideCoroutine;
+
+    private int addedPartsCounter = 0; // Track how many parts have been added
 
     private void OnTriggerEnter(Collider other)
     {
@@ -76,29 +84,48 @@ public class TableTrigger : MonoBehaviour
 
         ShowMessage("Placing " + part.ToString().ToLower() + "...");
 
-        switch (part)
+        if (part == BodyPart.Heart && heartTimeline != null)
         {
-            case BodyPart.Heart:
-                if (heartTimeline != null) heartTimeline.Play();
-                break;
-
-            case BodyPart.Lungs:
-                if (LungsTimeline != null) LungsTimeline.Play();
-                break;
-
-            case BodyPart.Brain:
-                if (BrainTimeline != null) BrainTimeline.Play();
-                break;
-
-            case BodyPart.Ribs:
-                if (RibsTimeline != null) RibsTimeline.Play();
-                break;
+            heartTimeline.Play();
         }
+        else if (part == BodyPart.Lungs && lungsTimeline != null)
+        {
+            lungsTimeline.Play();
+        }
+        else if (part == BodyPart.Brain && brainTimeline != null)
+        {
+            brainTimeline.Play();
+        }
+        else if (part == BodyPart.Ribs && ribsTimeline != null)
+        {
+            ribsTimeline.Play();
+        }
+
+        yield return new WaitForSeconds(messageDuration);
 
         inventory.RemovePart();
 
+        addedPartsCounter++;
+
         ShowMessage("One step closer...");
         yield return new WaitForSeconds(messageDuration);
+
+        if (addedPartsCounter == 1 && ominousStage5_4 != null)
+        {
+            ominousStage5_4.Play();
+        }
+        else if (addedPartsCounter == 2 && ominousStage4_3 != null)
+        {
+            ominousStage4_3.Play();
+        }
+        else if (addedPartsCounter == 3 && ominousStage3_2 != null)
+        {
+            ominousStage3_2.Play();
+        }
+        else if (addedPartsCounter == 4 && ominousStage2_1 != null)
+        {
+            ominousStage2_1.Play();
+        }
 
         HideMessage();
     }
@@ -124,4 +151,3 @@ public class TableTrigger : MonoBehaviour
         uiText.text = "";
     }
 }
-
