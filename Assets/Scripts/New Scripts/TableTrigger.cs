@@ -35,7 +35,7 @@ public class TableTrigger : MonoBehaviour
         doorDirector.Play();
         hasPlayed = true;
 
-        ShowMessage("There must be some parts around");
+        ShowMessage("There must be some parts lying around");
         yield return new WaitForSeconds(messageDuration);
 
         HideMessage();
