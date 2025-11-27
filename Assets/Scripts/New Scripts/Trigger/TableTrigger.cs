@@ -7,27 +7,26 @@ public class TableTrigger : MonoBehaviour
 {
     public TMP_Text uiText;
 
-    // Door animation
     public PlayableDirector doorDirector;
 
-    // Part Animations
     public PlayableDirector heartTimeline;
     public PlayableDirector lungsTimeline;
     public PlayableDirector brainTimeline;
     public PlayableDirector StomachTimeline;
 
-    // Ominous stage animations
     public PlayableDirector ominousStage5_4;
     public PlayableDirector ominousStage4_3;
     public PlayableDirector ominousStage3_2;
     public PlayableDirector ominousStage2_1;
+
+    public FinalTimer finalTimer;
 
     public float messageDuration = 2f;
 
     private bool hasPlayed = false;
     private Coroutine hideCoroutine;
 
-    private int addedPartsCounter = 0; // Track how many parts have been added
+    private int addedPartsCounter = 0;
 
     private void OnTriggerEnter(Collider other)
     {
@@ -101,14 +100,14 @@ public class TableTrigger : MonoBehaviour
             StomachTimeline.Play();
         }
 
-        yield return new WaitForSeconds(messageDuration);
-
         inventory.RemovePart();
+
+        yield return new WaitForSeconds(messageDuration);
 
         addedPartsCounter++;
 
         ShowMessage("One step closer...");
-        yield return new WaitForSeconds(messageDuration);
+        
 
         if (addedPartsCounter == 1 && ominousStage5_4 != null)
         {
@@ -125,7 +124,12 @@ public class TableTrigger : MonoBehaviour
         else if (addedPartsCounter == 4 && ominousStage2_1 != null)
         {
             ominousStage2_1.Play();
+
+            if (finalTimer != null)
+                finalTimer.StartTimer();
         }
+
+        yield return new WaitForSeconds(messageDuration);
 
         HideMessage();
     }

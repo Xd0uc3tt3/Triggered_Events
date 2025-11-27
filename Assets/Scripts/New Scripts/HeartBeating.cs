@@ -62,6 +62,10 @@ public class HeartBeating : MonoBehaviour
     private void PlayBeat()
     {
         if (heartbeatClip != null)
+        {
+            audioSource.pitch = Random.Range(0.95f, 1.05f);
+
             audioSource.PlayOneShot(heartbeatClip);
+        }
     }
 }
