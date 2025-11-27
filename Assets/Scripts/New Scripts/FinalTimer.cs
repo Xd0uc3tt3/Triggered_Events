@@ -1,34 +1,48 @@
 using UnityEngine;
-using UnityEngine.Events;
+using UnityEngine.Playables;
+using TMPro;
+using System.Collections;
 
 public class FinalTimer : MonoBehaviour
 {
-    public float timerDuration = 10f;
+    public TMP_Text uiText;
+    public PlayableDirector cutscene;
+    public float delayBeforeCountdown = 22f;
+    public float countdownDuration = 30f;
 
-    public UnityEvent onTimerComplete;
-
-    private float timer;
-    private bool running = false;
-
-    private void Update()
-    {
-        if (!running)
-            return;
-
-        timer += Time.deltaTime;
-
-        if (timer >= timerDuration)
-        {
-            running = false;
-            onTimerComplete?.Invoke();
-            Debug.Log("Final ominous timer finished.");
-        }
-    }
+    private bool timerStarted = false;
 
     public void StartTimer()
     {
-        timer = 0f;
-        running = true;
-        Debug.Log("Final ominous timer started.");
+        if (!timerStarted)
+        {
+            timerStarted = true;
+            StartCoroutine(TimerSequence());
+        }
+    }
+
+    private IEnumerator TimerSequence()
+    {
+        yield return new WaitForSeconds(delayBeforeCountdown);
+
+        float remainingTime = countdownDuration;
+        while (remainingTime > 0)
+        {
+            uiText.text = "God is coming in " + Mathf.CeilToInt(remainingTime) + "s";
+            yield return new WaitForSeconds(1f);
+            remainingTime -= 1f;
+        }
+
+        uiText.text = "God is coming!";
+        yield return new WaitForSeconds(2f);
+        uiText.text = "";
+
+        float randomDelay = Random.Range(1f, 5f);
+        yield return new WaitForSeconds(randomDelay);
+
+        if (cutscene != null)
+        {
+            cutscene.Play();
+        }
     }
 }
