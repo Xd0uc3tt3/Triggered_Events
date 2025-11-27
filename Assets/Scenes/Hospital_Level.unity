@@ -49237,7 +49237,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   uiText: {fileID: 1200960719}
   cutscene: {fileID: 99831554}
-  delayBeforeCountdown: 20
+  halfwayTimeline: {fileID: 1995880134}
+  delayBeforeCountdown: 30
   countdownDuration: 60
 --- !u!1 &1887024809
 GameObject:
@@ -52295,8 +52296,6 @@ PlayableDirector:
     value: {fileID: 303105548}
   - key: {fileID: 7752258755803899186, guid: 37c3b46bd70945740856dd2883ba77da, type: 2}
     value: {fileID: 900256846}
-  - key: {fileID: 4126925435002035311, guid: 37c3b46bd70945740856dd2883ba77da, type: 2}
-    value: {fileID: 1653966106}
   m_ExposedReferences:
     m_References: []
 --- !u!4 &1998130768 stripped

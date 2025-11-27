@@ -8,6 +8,8 @@ public class FinalTimer : MonoBehaviour
 {
     public TMP_Text uiText;
     public PlayableDirector cutscene;
+    public PlayableDirector halfwayTimeline;
+
     public float delayBeforeCountdown = 22f;
     public float countdownDuration = 60f;
 
@@ -44,6 +46,11 @@ public class FinalTimer : MonoBehaviour
             {
                 halfwayTriggered = true;
                 LightManager.LightsOut = true;
+
+                if (halfwayTimeline != null)
+                {
+                    halfwayTimeline.Play();
+                }
             }
 
             uiText.text = "God is coming in " + Mathf.CeilToInt(remainingTime) + "s";
@@ -69,4 +76,3 @@ public class FinalTimer : MonoBehaviour
         SceneManager.LoadScene("MainMenu");
     }
 }
-
